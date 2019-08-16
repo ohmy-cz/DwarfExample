@@ -3,24 +3,39 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Choose your meal:</p>
-    <ul>
-        @foreach (var m in Model.Meals)
-        {
-            <li>
-                <input type="radio" /> @m.Obj.Name
-            </li>
-        }
-    </ul>
-    <p>Choose your drink:</p>
-    <ul>
-        @foreach (var m in Model.Drinks)
-        {
-            <li>
-                <input type="radio" /> @m.Obj.Name
-            </li>
-        }
-    </ul>
+<h1 class="display-4">Welcome at Sunset Boulevard</h1>
+<div class="row">
+    <div class="col">
+        <h2>Book your table:</h2>
+        <p>We're open from 16:00 to 22:00</p>
+        <p>How many are you?</p>
+        @Html.TextBoxFor(x => Model.GuestsCount, new { @class="guestsCount", required = string.Empty, type = "number", min = "1", max = Model.TablesCount * 2 })
+        <p>Available tables: <span class="availableTables">@Model.TablesCount</span></p>
+        <div class="row bookingTimes">
+            <div class="col-md-4"><a href="#" class="btn btn-outline-secondary btn-block disabled">16:00 - 18:00</a></div>
+            <div class="col-md-4"><a href="#" class="btn btn-outline-secondary btn-block">18:00 - 20:00</a></div>
+            <div class="col-md-4"><a href="#" class="btn btn-outline-secondary btn-block">20:00 - 22:00</a></div>
+        </div>
+    </div>
+    <div class="col">
+        <h2>Choose your meal:</h2>
+        <ul class="list-unstyled">
+            @foreach (var m in Model.Meals)
+            {
+                <li>
+                    @Html.RadioButtonFor(x => m.Selected, m.Selected) @m.Obj.Name
+                </li>
+            }
+        </ul>
+        <p>Choose your drink:</p>
+        <ul class="list-unstyled">
+            @foreach (var d in Model.Drinks)
+            {
+                <li>
+                    @Html.RadioButtonFor(x => d.Selected, d.Selected) @d.Obj.Name
+                </li>
+            }
+        </ul>
+    </div>
 </div>
+<input type="hidden" class="jsTablesCount" value="@Model.TablesCount" />

@@ -35,6 +35,7 @@ namespace Dk.Dwarf.Example
 
             var config = new Configuration(); 
             Configuration.Bind("DwarfExample", config);
+            services.AddSingleton(config);
             services.AddSingleton(new MealsService(config.MealsAPIEndpoint));
             services.AddSingleton(new DrinksService(config.DrinksAPIEndpoint));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

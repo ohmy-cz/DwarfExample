@@ -8,5 +8,6 @@ namespace Dk.Dwarf.Example.BusinessLayer.Models
     {
         public string DrinksAPIEndpoint { get; set; }
         public string MealsAPIEndpoint { get; set;}
+        public int TablesCount { get; set; }
     }
 }

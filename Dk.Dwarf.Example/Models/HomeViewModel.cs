@@ -7,5 +7,7 @@ namespace Dk.Dwarf.Example.Models
     {
         public List<SelectModel<MealModel>> Meals { get; set; }
         public List<SelectModel<DrinkModel>> Drinks { get; set; }
+        public int TablesCount { get; set; }
+        public int GuestsCount { get; set; }
     }
 }

@@ -14,16 +14,20 @@ namespace Dk.Dwarf.Example.Controllers
     {
         readonly MealsService _mealsService;
         readonly DrinksService _drinksService;
-        public HomeController(MealsService mealsService, DrinksService drinksService)
+        readonly Configuration _configuration;
+        public HomeController(MealsService mealsService, DrinksService drinksService, Configuration configuration)
         {
             _mealsService = mealsService ?? throw new ArgumentNullException(nameof(mealsService));
             _drinksService = drinksService ?? throw new ArgumentNullException(nameof(drinksService));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
         public IActionResult Index()
         {
             var model = new HomeViewModel {
                 Meals = _mealsService.GetMeals().Select(m => new SelectModel<MealModel>(m)).ToList(),
-                Drinks = _drinksService.GetDrinks().Select(d => new SelectModel<DrinkModel>(d)).ToList()
+                Drinks = _drinksService.GetDrinks().Select(d => new SelectModel<DrinkModel>(d)).ToList(),
+                GuestsCount = 0,
+                TablesCount = _configuration.TablesCount
             };
             return View(model);
         }
